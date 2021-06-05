@@ -4,11 +4,16 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri("https://plugins.gradle.org/m2/")
+        }
     }
     dependencies {
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.36'
         classpath "com.android.tools.build:gradle:4.2.1"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
+        classpath "org.jmailen.gradle:kotlinter-gradle:3.4.4"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -24,4 +29,22 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+configurations {
+    detekt
+}
+
+task detekt(type: JavaExec) {
+    main = "io.gitlab.arturbosch.detekt.cli.Main"
+    classpath = configurations.detekt
+    def input = "$projectDir"
+    def config = "$projectDir/detekt.yml"
+    def exclude = ".*/build/.*,.*/resources/.*"
+    def params = [ '-i', input, '-c', config, '-ex', exclude]
+    args(params)
+}
+
+dependencies {
+    detekt 'io.gitlab.arturbosch.detekt:detekt-cli:1.17.1'
 }
