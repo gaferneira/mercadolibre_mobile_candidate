@@ -1,6 +1,7 @@
 package com.mercadolibre.domain.base
 
 import timber.log.Timber
+import java.net.UnknownHostException
 import java.util.concurrent.TimeoutException
 
 sealed class Failure(val error: Exception?) {
@@ -17,6 +18,7 @@ sealed class Failure(val error: Exception?) {
         fun analyzeException(exception: Exception?): Failure {
             // TODO Create cases
             return when (exception) {
+                is UnknownHostException -> NetworkConnection(exception)
                 is TimeoutException -> NetworkConnection(exception)
                 else -> {
                     exception?.run {
