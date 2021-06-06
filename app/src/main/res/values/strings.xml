@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">MercadoLibre</string>
+
+    <string name="app_name">Test MeLi</string>
+
+    <string name="action_purchase">Comprar</string>
+    <string name="action_retry">Reintentar</string>
+
+    <string name="hint_search_product">Buscar producto</string>
+
+    <string name="error_connection">Hubo una falla de conexión, por favor revise su conexión a internet</string>
+    <string name="error_server">Hubo un error, por favor inténtelo de nuevo más tarde</string>
+
+    <string name="label_description">Descripción</string>
+    <string name="label_seller">Vendedor</string>
+
 </resources>

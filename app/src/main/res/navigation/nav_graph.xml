@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.mercadolibre.mobile.ui.home.HomeFragment"
+        android:label="home_fragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_to_searchFragment"
+            app:destination="@id/searchFragment">
+
+            <argument
+                android:name="query"
+                app:argType="string"
+                app:nullable="true" />
+
+        </action>
+        <action
+            android:id="@+id/action_detailsFragment"
+            app:destination="@id/detailsFragment">
+            <argument
+                android:name="product"
+                app:argType="com.mercadolibre.domain.entities.Product" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.mercadolibre.mobile.ui.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search">
+
+        <argument
+            android:name="query"
+            app:argType="string"
+            app:nullable="true" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.mercadolibre.mobile.ui.details.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details">
+
+        <argument
+            android:name="product"
+            app:argType="com.mercadolibre.domain.entities.Product" />
+
+    </fragment>
+
+
+</navigation>

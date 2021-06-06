@@ -1,5 +1,7 @@
 package com.mercadolibre.domain.entities
 
+import java.io.Serializable
+
 data class Product(
     val acceptsMercadoPago: Boolean? = false,
     val availableQuantity: Int? = 0,
@@ -23,4 +25,4 @@ data class Product(
     val thumbnailId: String? = "",
     val title: String? = "",
     val useThumbnailId: Boolean? = false
-)
+) : Serializable
