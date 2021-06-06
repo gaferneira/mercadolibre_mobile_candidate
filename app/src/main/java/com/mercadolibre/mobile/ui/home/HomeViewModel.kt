@@ -23,7 +23,7 @@ class HomeViewModel @Inject constructor(
     val products = searchText.switchMap { query ->
         liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
             if (query.isEmpty()) {
-                emit(Resource.Success(listOf()))
+                emit(Resource.None)
                 return@liveData
             }
             emit(Resource.Loading)

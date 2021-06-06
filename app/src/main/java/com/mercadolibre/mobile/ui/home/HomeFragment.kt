@@ -47,7 +47,9 @@ class HomeFragment : Fragment(), ProductsAdapter.ProductsListener {
             adapter = this@HomeFragment.adapter
         }
         binding.editTextQuery.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionToSearchFragment(binding.editTextQuery.text.toString()))
+            findNavController().navigate(
+                HomeFragmentDirections.actionToSearchFragment(binding.editTextQuery.text.toString())
+            )
         }
         binding.editTextQuery.setText(viewModel.searchText.value)
     }

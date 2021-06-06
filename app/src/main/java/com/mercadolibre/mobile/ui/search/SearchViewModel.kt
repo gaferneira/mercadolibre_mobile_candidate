@@ -25,7 +25,11 @@ class SearchViewModel @Inject constructor(
     init {
         viewModelScope.launch {
              //TODO implement recent search
-             val response = listOf(RecentSearch("motorola", Date()), RecentSearch("samsung", Date()), RecentSearch("iphone", Date()))
+             val response = listOf(
+                 RecentSearch("motorola", Date()),
+                 RecentSearch("samsung", Date()),
+                 RecentSearch("iphone", Date())
+             )
             _recentSearchList.value = Resource.Success(response)
         }
     }

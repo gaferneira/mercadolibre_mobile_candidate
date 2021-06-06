@@ -14,5 +14,6 @@ object DomainModule {
 
     @Singleton
     @Provides
-    fun provideSearchProduct(repository : ProductsRepository) : SearchProductsUseCase = SearchProductsUseCase(repository)
+    fun provideSearchProduct(repository : ProductsRepository) : SearchProductsUseCase =
+        SearchProductsUseCase(repository)
 }
