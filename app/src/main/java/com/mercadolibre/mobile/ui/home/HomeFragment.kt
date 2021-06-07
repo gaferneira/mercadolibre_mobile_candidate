@@ -46,56 +46,67 @@ class HomeFragment : Fragment(), ProductsAdapter.ProductsListener {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = this@HomeFragment.adapter
         }
-        binding.editTextQuery.setOnClickListener {
+        binding.editTextSearch.setOnClickListener {
             findNavController().navigate(
-                HomeFragmentDirections.actionToSearchFragment(binding.editTextQuery.text.toString())
+                HomeFragmentDirections.actionToSearchFragment(binding.editTextSearch.text.toString())
             )
         }
-        binding.editTextQuery.setText(viewModel.searchText.value)
     }
 
     private fun initObservers() {
         viewModel.products.observe(viewLifecycleOwner, { state ->
             when (state) {
+                Resource.None -> {
+                    updateView(showInitialView = true, products = listOf())
+                }
                 is Resource.Error -> {
-                    showLoading(false)
-                    showError(state.failure)
+                    updateView(error = state.failure)
                 }
                 Resource.Loading -> {
-                    showLoading(true)
+                    updateView(showLoading = true)
                 }
                 is Resource.Success -> {
-                    showLoading(false)
-                    adapter.setItems(state.data)
+                    updateView(products = state.data)
                 }
             }
+        })
+
+        viewModel.searchText.observe(viewLifecycleOwner, {
+            binding.editTextSearch.setText(it)
         })
 
         setFragmentResultListener(SearchFragment.REQUEST_KEY) { _: String, bundle: Bundle ->
             val query = bundle.getString(SearchFragment.PARAM_QUERY).orEmpty()
             viewModel.search(query)
-            binding.editTextQuery.setText(query)
         }
-
     }
 
     override fun onClickProduct(product: Product) {
         findNavController().navigate(HomeFragmentDirections.actionDetailsFragment(product))
     }
 
-    private fun showLoading(show: Boolean) {
-        binding.loadingProgressBar.isVisible = show
+    private fun updateView(showInitialView : Boolean = false, showLoading: Boolean = false, error : Failure? = null, products : List<Product>? = null) {
+        binding.containerGetStarted.isVisible = showInitialView
+        binding.loadingProgressBar.isVisible = showLoading
+        error?.let {
+            showError(it)
+        }
+
+        products?.let {
+            adapter.setItems(it)
+        }
+
+        binding.containerEmptyView.isVisible = products?.isEmpty() == true && showInitialView.not()
     }
 
     private fun showError(failure: Failure) {
-
         val message = when (failure) {
             is Failure.NetworkConnection -> R.string.error_connection
             else -> R.string.error_server
         }
         Snackbar.make(binding.root, message, Snackbar.LENGTH_INDEFINITE)
             .setAction(R.string.action_retry) {
-                viewModel.search(binding.editTextQuery.text.toString())
+                viewModel.search(binding.editTextSearch.text.toString())
             }
             .show()
     }

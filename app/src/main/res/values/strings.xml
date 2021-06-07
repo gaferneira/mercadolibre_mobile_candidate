@@ -13,4 +13,7 @@
     <string name="label_description">Descripción</string>
     <string name="label_seller">Vendedor</string>
 
+    <string name="message_get_started">Para comenzar, realice una busqueda en la parte superior derecha</string>
+    <string name="message_items_not_found">No se encontró ningun producto con el criterio de búsqueda.</string>
+
 </resources>
