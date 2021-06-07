@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -15,7 +16,11 @@ import com.mercadolibre.domain.base.Failure
 import com.mercadolibre.domain.entities.Product
 import com.mercadolibre.mobile.R
 import com.mercadolibre.mobile.databinding.FragmentHomeBinding
+import com.mercadolibre.mobile.databinding.ItemHomeProductBinding
 import com.mercadolibre.mobile.ui.search.SearchFragment
+import com.mercadolibre.mobile.utils.extensions.navigate
+import com.mercadolibre.mobile.utils.extensions.setExitToFullScreenTransition
+import com.mercadolibre.mobile.utils.extensions.setReturnFromFullScreenTransition
 import com.mercadolibre.mobile.utils.view.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,6 +43,10 @@ class HomeFragment : Fragment(), ProductsAdapter.ProductsListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initObservers()
+
+        setExitToFullScreenTransition()
+        setReturnFromFullScreenTransition()
+
     }
 
     private fun setupView() {
@@ -45,11 +54,15 @@ class HomeFragment : Fragment(), ProductsAdapter.ProductsListener {
         with(binding.recyclerView) {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = this@HomeFragment.adapter
+
+            postponeEnterTransition()
+            viewTreeObserver.addOnPreDrawListener {
+                startPostponedEnterTransition()
+                true
+            }
         }
         binding.editTextSearch.setOnClickListener {
-            findNavController().navigate(
-                HomeFragmentDirections.actionToSearchFragment(binding.editTextSearch.text.toString())
-            )
+            goToSearchView()
         }
     }
 
@@ -81,8 +94,22 @@ class HomeFragment : Fragment(), ProductsAdapter.ProductsListener {
         }
     }
 
-    override fun onClickProduct(product: Product) {
-        findNavController().navigate(HomeFragmentDirections.actionDetailsFragment(product))
+    private fun goToSearchView() {
+        val extraInfoForSharedElement = FragmentNavigatorExtras(
+            binding.editTextSearch to binding.editTextSearch.transitionName
+        )
+        navigate(HomeFragmentDirections.actionToSearchFragment(
+            binding.editTextSearch.text.toString()),
+            extraInfoForSharedElement
+        )
+    }
+
+    override fun onClickProduct(product: Product, view: View) {
+        val transitionName = view.transitionName
+        val extraInfoForSharedElement = FragmentNavigatorExtras(
+            view to transitionName
+        )
+        navigate(HomeFragmentDirections.actionDetailsFragment(product, transitionName), extraInfoForSharedElement)
     }
 
     private fun updateView(showInitialView : Boolean = false,

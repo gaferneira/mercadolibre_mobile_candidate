@@ -1,6 +1,7 @@
 package com.mercadolibre.mobile.ui.home
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mercadolibre.domain.entities.Product
@@ -15,7 +16,7 @@ class ProductsAdapter(
     private var list = listOf<Product>()
 
     interface ProductsListener {
-        fun onClickProduct(product: Product)
+        fun onClickProduct(product: Product, view: View)
     }
 
     override fun getItemCount(): Int = list.size
@@ -47,10 +48,11 @@ class ProductsAdapter(
         ) {
             binding.textViewTitle.text = product.title
             binding.textViewPrice.text = numberFormat.format(product.price)
-            GlideApp.with(itemView).load(product.thumbnail).into(binding.imageViewThumbnail);
+            GlideApp.with(itemView).load(product.thumbnail).into(binding.imageViewThumbnail)
+            binding.imageViewThumbnail.transitionName = product.thumbnail
 
-            itemView.setOnClickListener {
-                listener?.onClickProduct(product)
+            binding.root.setOnClickListener {
+                listener?.onClickProduct(product, binding.imageViewThumbnail)
             }
         }
     }

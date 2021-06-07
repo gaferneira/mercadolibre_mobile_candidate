@@ -91,6 +91,3 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
-
-# google services
-/app/google-services.json

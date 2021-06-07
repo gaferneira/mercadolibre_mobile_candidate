@@ -8,13 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.mercadolibre.mobile.R
 import com.mercadolibre.mobile.databinding.FragmentDetailsBinding
-import com.mercadolibre.mobile.utils.view.GlideApp
 import com.mercadolibre.mobile.utils.extensions.autoCleared
+import com.mercadolibre.mobile.utils.extensions.setSharedElementTransitionOnEnter
+import com.mercadolibre.mobile.utils.extensions.startEnterTransitionAfterLoadingImage
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.NumberFormat
 
@@ -31,8 +31,14 @@ class DetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDetailsBinding.inflate(layoutInflater)
-        setupView()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setSharedElementTransitionOnEnter()
+        postponeEnterTransition()
+        setupView()
     }
 
     private fun setupView() {
@@ -45,7 +51,9 @@ class DetailsFragment : Fragment() {
         }
 
         with(args.product) {
-            GlideApp.with(requireContext()).load(thumbnail).into(binding.image)
+
+            binding.image.transitionName = args.transitionName
+            startEnterTransitionAfterLoadingImage(thumbnail.orEmpty(), binding.image)
 
             binding.textViewTitle.text = title
             binding.labelSeller.isVisible = seller.isNotBlank()

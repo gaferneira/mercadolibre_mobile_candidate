@@ -14,10 +14,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.transition.TransitionInflater
 import com.mercadolibre.domain.entities.RecentSearch
+import com.mercadolibre.mobile.R
 import com.mercadolibre.mobile.databinding.FragmentSearchBinding
 import com.mercadolibre.mobile.utils.view.Resource
 import com.mercadolibre.mobile.utils.extensions.autoCleared
+import com.mercadolibre.mobile.utils.extensions.setSharedElementTransitionOnEnter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -63,6 +66,7 @@ class SearchFragment : Fragment(), RecentSearchAdapter.RecentSearchListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setSearchTransitionOnEnter()
         showKeyboard()
         initObservers()
     }
@@ -94,6 +98,11 @@ class SearchFragment : Fragment(), RecentSearchAdapter.RecentSearchListener {
         viewModel.addRecentSearch(query)
         setFragmentResult(REQUEST_KEY, bundleOf(PARAM_QUERY to query))
         findNavController().popBackStack()
+    }
+
+    private fun setSearchTransitionOnEnter() {
+        sharedElementEnterTransition = TransitionInflater.from(context)
+            .inflateTransition(R.transition.search_transition)
     }
 
     companion object {

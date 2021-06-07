@@ -14,11 +14,15 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/search_view_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="@dimen/padding_margin_micro"
+            android:background="?colorPrimary"
+            >
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
-                android:layout_height="?actionBarSize"
+                android:layout_height="48dp"
                 android:layout_margin="@dimen/padding_margin_micro"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp"
@@ -35,6 +39,7 @@
                     android:drawableStart="@drawable/ic_baseline_search_24"
                     android:drawablePadding="@dimen/padding_margin_small"
                     android:focusable="false"
+                    android:transitionName="query"
                     android:hint="@string/hint_search_product"
                     android:inputType="text" />
 

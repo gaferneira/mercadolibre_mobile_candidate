@@ -12,7 +12,8 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_to_searchFragment"
-            app:destination="@id/searchFragment">
+            app:destination="@id/searchFragment"
+            >
 
             <argument
                 android:name="query"
@@ -22,10 +23,20 @@
         </action>
         <action
             android:id="@+id/action_detailsFragment"
-            app:destination="@id/detailsFragment">
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            >
             <argument
                 android:name="product"
                 app:argType="com.mercadolibre.domain.entities.Product" />
+
+            <argument
+                android:name="transitionName"
+                app:argType="string" />
+
         </action>
     </fragment>
 
@@ -51,7 +62,10 @@
             android:name="product"
             app:argType="com.mercadolibre.domain.entities.Product" />
 
-    </fragment>
+        <argument
+            android:name="transitionName"
+            app:argType="string" />
 
+    </fragment>
 
 </navigation>
