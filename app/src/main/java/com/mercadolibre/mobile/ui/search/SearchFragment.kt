@@ -70,12 +70,11 @@ class SearchFragment : Fragment(), RecentSearchAdapter.RecentSearchListener {
     private fun initObservers() {
         viewModel.recentSearchList.observe(viewLifecycleOwner, { state ->
             when (state) {
-                is Resource.Error,
-                is Resource.Loading -> {
-                    adapter.setItems(listOf())
-                }
                 is Resource.Success -> {
                     adapter.setItems(state.data)
+                }
+                else -> {
+                    adapter.setItems(listOf())
                 }
             }
         })
@@ -92,6 +91,7 @@ class SearchFragment : Fragment(), RecentSearchAdapter.RecentSearchListener {
     }
 
     private fun doSearch(query: String) {
+        viewModel.addRecentSearch(query)
         setFragmentResult(REQUEST_KEY, bundleOf(PARAM_QUERY to query))
         findNavController().popBackStack()
     }

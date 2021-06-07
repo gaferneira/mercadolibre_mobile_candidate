@@ -1,13 +1,18 @@
 package com.mercadolibre.data.di
 
 import android.content.Context
+import androidx.room.Room
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.mercadolibre.data.local.AppDatabase
+import com.mercadolibre.data.local.RecentSearchDao
 import com.mercadolibre.data.remote.ProductsService
 import com.mercadolibre.data.repositories.PreferencesRepositoryImpl
 import com.mercadolibre.data.repositories.ProductsRepositoryImpl
+import com.mercadolibre.data.repositories.RecentSearchRepositoryImpl
 import com.mercadolibre.domain.repositories.PreferencesRepository
 import com.mercadolibre.domain.repositories.ProductsRepository
+import com.mercadolibre.domain.repositories.RecentSearchRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,7 +39,22 @@ object DataModule {
     @Provides
     fun provideProductsService(retrofit: Retrofit): ProductsService =
         retrofit.create(ProductsService::class.java)
-    
+
+    @Provides
+    @Singleton
+    fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
+        return Room.databaseBuilder(
+            appContext,
+            AppDatabase::class.java,
+            "MeliDB"
+        ).build()
+    }
+
+    @Provides
+    fun provideRecentSearchDao(appDatabase: AppDatabase): RecentSearchDao {
+        return appDatabase.recentSearchDao()
+    }
+
     @Singleton
     @Provides
     fun providePreferencesRepository(@ApplicationContext context: Context): PreferencesRepository = PreferencesRepositoryImpl(context)
@@ -44,4 +64,8 @@ object DataModule {
     fun provideProductRepository(service: ProductsService, preferencesRepository: PreferencesRepository): ProductsRepository =
         ProductsRepositoryImpl(service, preferencesRepository)
 
+    @Singleton
+    @Provides
+    fun provideRecentSearchRepository(recentSearchDao: RecentSearchDao): RecentSearchRepository =
+        RecentSearchRepositoryImpl(recentSearchDao)
 }

@@ -13,6 +13,7 @@ import com.mercadolibre.mobile.BaseEspressoTest
 import com.mercadolibre.mobile.R
 import com.mercadolibre.mobile.ui.home.ProductsAdapter
 import com.mercadolibre.mobile.utils.CustomMatchers.waitViewIsDisplayed
+import com.mercadolibre.mobile.utils.RecyclerViewMatcher
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -86,6 +87,29 @@ class MainActivityTest : BaseEspressoTest() {
 
         //Check that details page is showed
         waitViewIsDisplayed(withId(R.id.button_purchase))
+
+    }
+
+    @Test
+    fun checkRecentSearch() {
+
+        waitViewIsDisplayed(withId(R.id.container_get_started))
+
+        //Go to search view
+        onView(withId(R.id.edit_text_search)).perform(click())
+
+        //Do search
+        val query = "Samsung"
+        onView(withId(R.id.edit_text_query)).perform(replaceText(query), pressImeActionButton())
+
+        //Go to search view
+        onView(withId(R.id.edit_text_search)).perform(click())
+        waitViewIsDisplayed(withId(R.id.text_view_query))
+
+        //check that recent search was added
+        onView(RecyclerViewMatcher(R.id.recycler_view)
+            .atPositionOnView(0, R.id.text_view_query))
+            .check(matches(withText(query)))
 
     }
 

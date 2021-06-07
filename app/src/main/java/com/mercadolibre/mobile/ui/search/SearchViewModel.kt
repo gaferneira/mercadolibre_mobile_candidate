@@ -5,15 +5,22 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.LiveData
+import com.mercadolibre.domain.base.Result
 import com.mercadolibre.domain.entities.RecentSearch
+import com.mercadolibre.domain.usecases.AddRecentSearchUseCase
+import com.mercadolibre.domain.usecases.GetRecentSearchUseCase
 import com.mercadolibre.mobile.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
+    private val getRecentSearchUseCase: GetRecentSearchUseCase,
+    private val addRecentSearchUseCase: AddRecentSearchUseCase,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -24,13 +31,19 @@ class SearchViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-             //TODO implement recent search
-             val response = listOf(
-                 RecentSearch("motorola", Date()),
-                 RecentSearch("samsung", Date()),
-                 RecentSearch("iphone", Date())
-             )
-            _recentSearchList.value = Resource.Success(response)
+            val list = withContext(Dispatchers.IO) {
+                when (val response = getRecentSearchUseCase()) {
+                    is Result.Success -> response.data
+                    is Result.Error -> listOf()
+                }
+            }
+            _recentSearchList.value = Resource.Success(list)
+        }
+    }
+
+    fun addRecentSearch(query: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            addRecentSearchUseCase(query)
         }
     }
 }

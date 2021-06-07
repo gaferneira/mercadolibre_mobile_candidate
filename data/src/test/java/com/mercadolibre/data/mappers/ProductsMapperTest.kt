@@ -9,11 +9,11 @@ import org.junit.Test
 
 class ProductsMapperTest {
 
-    private lateinit var movieMapper: ProductMapper
+    private lateinit var mapper: ProductMapper
 
     @Before
     fun setUp() {
-        movieMapper = ProductMapper()
+        mapper = ProductMapper()
     }
 
     @Test
@@ -22,7 +22,7 @@ class ProductsMapperTest {
         val productEntity = ProductsFactory.generateProductEntity()
 
         // Act
-        val product = movieMapper.mapFromEntity(productEntity)
+        val product = mapper.mapFromEntity(productEntity)
 
         // Assert
         assertProductDataEquality(productEntity, product)
@@ -34,7 +34,7 @@ class ProductsMapperTest {
         val product = ProductsFactory.generateProduct()
 
         // Act
-        val productEntity = movieMapper.mapToEntity(product)
+        val productEntity = mapper.mapToEntity(product)
 
         // Assert
         assertProductDataEquality(productEntity, product)
