@@ -1,51 +1,68 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="@dimen/padding_margin_small">
+    android:layout_marginHorizontal="@dimen/padding_margin_normal"
+    android:layout_marginVertical="@dimen/padding_margin_small"
+    android:padding="@dimen/padding_margin_small"
+    app:cardCornerRadius="@dimen/common_radius"
+    app:cardElevation="@dimen/common_elevation">
 
-    <ImageView
-        android:id="@+id/image_view_thumbnail"
-        android:layout_width="@dimen/image_size_medium"
-        android:layout_height="@dimen/image_size_medium"
-        android:layout_marginBottom="@dimen/padding_margin_small"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/text_view_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/padding_margin_normal_smaller"
-        android:layout_marginEnd="@dimen/padding_margin_normal_smaller"
-        android:textAppearance="?textAppearanceSubtitle1"
-        android:textColor="?colorOnSurface"
-        app:layout_constraintBottom_toTopOf="@+id/text_view_price"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/image_view_thumbnail"
-        app:layout_constraintTop_toTopOf="@id/image_view_thumbnail"
-        tools:text="Samsung s20" />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/container_image"
+            android:layout_width="@dimen/image_size_medium"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/padding_margin_normal"
+            app:cardCornerRadius="@dimen/common_radius"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/text_view_price"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?textAppearanceHeadline6"
-        android:textColor="?colorOnSurface"
-        app:layout_constraintEnd_toEndOf="@id/text_view_title"
-        app:layout_constraintStart_toStartOf="@id/text_view_title"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_title"
-        tools:text="$2.099.000" />
+            <ImageView
+                android:id="@+id/image_view_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@mipmap/ic_launcher" />
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/grey_300"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        </com.google.android.material.card.MaterialCardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/text_view_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/padding_margin_normal"
+            android:maxLines="1"
+            android:textAppearance="?textAppearanceHeadline6"
+            app:layout_constraintBottom_toTopOf="@+id/text_view_price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/container_image"
+            app:layout_constraintTop_toTopOf="@+id/container_image"
+            tools:text="Producto" />
+
+        <TextView
+            android:id="@+id/text_view_price"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/padding_margin_normal"
+            android:ellipsize="end"
+            android:maxLines="2"
+            app:layout_constraintBottom_toBottomOf="@+id/container_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/text_view_title"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_title"
+            tools:text="$1.000,00" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
