@@ -47,11 +47,11 @@ Este proyecto usa detekt para ayudar a mantener la calidad del código.
   Use `./gradlew detekt`
 
 # Screenshots
-| Main Screen | Search |  Details |
-|:-:|:-:|:-:|
-| ![1](assets/screenshots/light_1.png?raw=true) | ![2](assets/screenshots/light_2.png?raw=true) | ![3](assets/screenshots/light_3.png?raw=true) |
-| Main Screen Dark | Search Dark |  Details Dark |
-| ![4](assets/screenshots/dark_1.png?raw=true) | ![5](assets/screenshots/dark_2.png?raw=true) | ![6](assets/screenshots/dark_3.png?raw=true) |
+| Home | Search |  Home loaded |  Details |
+|:-:|:-:|:-:|:-:|
+| ![1](assets/screenshots/light_1.jpeg?raw=true) | ![2](assets/screenshots/light_2.jpeg?raw=true) | ![3](assets/screenshots/light_3.jpeg?raw=true) | ![4](assets/screenshots/light_4.jpeg?raw=true) |
+| Home Dark | Search Dark|  Home Loaded Dark | Details Dark |
+| ![1](assets/screenshots/night_1.jpeg?raw=true) | ![2](assets/screenshots/night_2.jpeg?raw=true) | ![3](assets/screenshots/night_3.jpeg?raw=true) | ![4](assets/screenshots/night_4.jpeg?raw=true) |
 
 
 ### Desarrollado por

@@ -45,4 +45,8 @@
 
     <dimen name="search_view_height">60dp</dimen>
 
+    <dimen name="common_radius">14dp</dimen>
+    <dimen name="common_elevation">8dp</dimen>
+    <dimen name="detail_image_size">200dp</dimen>
+
 </resources>
