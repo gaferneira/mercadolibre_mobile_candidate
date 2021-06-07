@@ -15,5 +15,6 @@
 
     <string name="message_get_started">Para comenzar, realice una busqueda en la parte superior derecha</string>
     <string name="message_items_not_found">No se encontró ningun producto con el criterio de búsqueda.</string>
+    <string name="message_location_permission">Para poder saber en que pais te encuentras necesitamos tener acceso a tu ubicación</string>
 
 </resources>

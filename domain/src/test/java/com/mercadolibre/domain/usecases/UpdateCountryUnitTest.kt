@@ -3,30 +3,29 @@ package com.mercadolibre.domain.usecases
 import com.mercadolibre.domain.utils.TestCoroutineRule
 import com.mercadolibre.domain.base.Failure
 import com.mercadolibre.domain.base.Result
-import com.mercadolibre.domain.factory.ProductsFactory
+import com.mercadolibre.domain.entities.Country
 import com.mercadolibre.domain.utils.relaxedMockk
-import com.mercadolibre.domain.repositories.ProductsRepository
+import com.mercadolibre.domain.repositories.PreferencesRepository
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Assert.assertFalse
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
 
 @ExperimentalCoroutinesApi
-class SearchProductsUnitTest {
+class UpdateCountryUnitTest {
 
     @get:Rule
     val testCoroutineRule = TestCoroutineRule()
 
     @RelaxedMockK
-    private lateinit var repository: ProductsRepository
+    private lateinit var repository: PreferencesRepository
 
-    private lateinit var useCase: SearchProductsUseCase
+    private lateinit var useCase: UpdateCountryUseCase
 
     @Before
     fun setUp() {
@@ -34,36 +33,31 @@ class SearchProductsUnitTest {
     }
 
     @Test
-    fun `When service is called, it should return a list`() {
+    fun `When repository is called, it should return success`() {
 
         repository = relaxedMockk {
-            coEvery { searchByQuery(any()) } returns Result.Success(
-                ProductsFactory.generateDummyProductList(
-                    10
-                )
-            )
+            coEvery { setCountry(any()) } returns Result.Success(Country.COLOMBIA)
         }
 
-        useCase = SearchProductsUseCase(repository)
+        useCase = UpdateCountryUseCase(repository)
 
         testCoroutineRule.runBlockingTest {
-            val response = useCase.invoke("query")
+            val response = useCase.invoke(Country.COLOMBIA)
             assert(response is Result.Success)
-            assertFalse((response as Result.Success).data.isNullOrEmpty())
         }
     }
 
     @Test
-    fun `When service fails, it should return an error`() {
+    fun `When repository fails, it should return an error`() {
 
         repository = relaxedMockk {
-            coEvery { searchByQuery(any()) } returns Result.Error(Failure.UnknownException())
+            coEvery { setCountry(any()) } returns Result.Error(Failure.UnknownException())
         }
 
-        useCase = SearchProductsUseCase(repository)
+        useCase = UpdateCountryUseCase(repository)
 
         testCoroutineRule.runBlockingTest {
-            val response = useCase.invoke("query")
+            val response = useCase.invoke(Country.COLOMBIA)
             assert(response is Result.Error)
         }
     }

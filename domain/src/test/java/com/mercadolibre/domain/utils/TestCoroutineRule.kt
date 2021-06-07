@@ -1,4 +1,4 @@
-package com.mercadolibre.domain
+package com.mercadolibre.domain.utils
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

@@ -1,4 +1,4 @@
-package com.mercadolibre.domain
+package com.mercadolibre.domain.utils
 
 import io.mockk.mockk
 

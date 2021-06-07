@@ -85,7 +85,11 @@ class HomeFragment : Fragment(), ProductsAdapter.ProductsListener {
         findNavController().navigate(HomeFragmentDirections.actionDetailsFragment(product))
     }
 
-    private fun updateView(showInitialView : Boolean = false, showLoading: Boolean = false, error : Failure? = null, products : List<Product>? = null) {
+    private fun updateView(showInitialView : Boolean = false,
+                           showLoading: Boolean = false,
+                           error : Failure? = null,
+                           products : List<Product>? = null) {
+
         binding.containerGetStarted.isVisible = showInitialView
         binding.loadingProgressBar.isVisible = showLoading
         error?.let {
