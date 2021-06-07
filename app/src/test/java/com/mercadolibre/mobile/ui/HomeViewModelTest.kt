@@ -9,6 +9,7 @@ import com.mercadolibre.domain.usecases.SearchProductsUseCase
 import com.mercadolibre.mobile.factory.ProductsFactory
 import com.mercadolibre.mobile.ui.home.HomeViewModel
 import com.mercadolibre.mobile.utils.*
+import com.mercadolibre.mobile.utils.view.Resource
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.*

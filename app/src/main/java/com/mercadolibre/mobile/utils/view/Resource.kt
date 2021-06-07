@@ -1,4 +1,4 @@
-package com.mercadolibre.mobile.utils
+package com.mercadolibre.mobile.utils.view
 
 import com.mercadolibre.domain.base.Failure
 

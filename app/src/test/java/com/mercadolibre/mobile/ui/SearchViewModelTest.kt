@@ -3,14 +3,12 @@ package com.mercadolibre.mobile.ui
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.SavedStateHandle
 import com.mercadolibre.domain.base.Result
-import com.mercadolibre.domain.entities.Country
 import com.mercadolibre.domain.usecases.AddRecentSearchUseCase
-import com.mercadolibre.domain.usecases.GetCountryUseCase
 import com.mercadolibre.domain.usecases.GetRecentSearchUseCase
-import com.mercadolibre.domain.usecases.UpdateCountryUseCase
 import com.mercadolibre.mobile.factory.RecentSearchFactory
 import com.mercadolibre.mobile.ui.search.SearchViewModel
 import com.mercadolibre.mobile.utils.*
+import com.mercadolibre.mobile.utils.view.Resource
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.*

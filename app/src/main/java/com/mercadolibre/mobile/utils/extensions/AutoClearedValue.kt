@@ -1,4 +1,4 @@
-package com.mercadolibre.mobile.utils
+package com.mercadolibre.mobile.utils.extensions
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.DefaultLifecycleObserver

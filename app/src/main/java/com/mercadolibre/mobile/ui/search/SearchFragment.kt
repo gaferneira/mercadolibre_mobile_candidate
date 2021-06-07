@@ -16,8 +16,8 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mercadolibre.domain.entities.RecentSearch
 import com.mercadolibre.mobile.databinding.FragmentSearchBinding
-import com.mercadolibre.mobile.utils.Resource
-import com.mercadolibre.mobile.utils.autoCleared
+import com.mercadolibre.mobile.utils.view.Resource
+import com.mercadolibre.mobile.utils.extensions.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

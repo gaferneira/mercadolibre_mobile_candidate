@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mercadolibre.domain.entities.Product
 import com.mercadolibre.mobile.databinding.ItemHomeProductBinding
-import com.mercadolibre.mobile.utils.GlideApp
+import com.mercadolibre.mobile.utils.view.GlideApp
 import java.text.NumberFormat
 
 class ProductsAdapter(

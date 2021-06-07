@@ -13,8 +13,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.mercadolibre.mobile.R
 import com.mercadolibre.mobile.databinding.FragmentDetailsBinding
-import com.mercadolibre.mobile.utils.GlideApp
-import com.mercadolibre.mobile.utils.autoCleared
+import com.mercadolibre.mobile.utils.view.GlideApp
+import com.mercadolibre.mobile.utils.extensions.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.NumberFormat
 

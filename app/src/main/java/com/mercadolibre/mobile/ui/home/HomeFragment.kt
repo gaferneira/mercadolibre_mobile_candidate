@@ -16,7 +16,7 @@ import com.mercadolibre.domain.entities.Product
 import com.mercadolibre.mobile.R
 import com.mercadolibre.mobile.databinding.FragmentHomeBinding
 import com.mercadolibre.mobile.ui.search.SearchFragment
-import com.mercadolibre.mobile.utils.Resource
+import com.mercadolibre.mobile.utils.view.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

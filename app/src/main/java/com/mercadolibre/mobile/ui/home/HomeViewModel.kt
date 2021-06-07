@@ -7,7 +7,7 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.mercadolibre.domain.base.Result
 import com.mercadolibre.domain.usecases.SearchProductsUseCase
-import com.mercadolibre.mobile.utils.Resource
+import com.mercadolibre.mobile.utils.view.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
